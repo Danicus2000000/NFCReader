@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NFC Reader</string>
+    <string name="noTagDetected">No Tag Detected!</string>
+    <string name="incompatibleTag">Incompatible Tag</string>
+    <string name="nfcTagId">NFC Tag ID:</string>
+    <string name="ndefId"> NFC NDEF:</string>
 </resources>
