@@ -155,12 +155,12 @@ public class MainActivity extends AppCompatActivity {
                 response = baos.toByteArray();
             }
             return response;
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
                 isoDep.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
