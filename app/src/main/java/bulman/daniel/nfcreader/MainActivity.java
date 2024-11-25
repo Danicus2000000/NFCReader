@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_RECEIVER_REPLACE_PENDING);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         IntentFilter[] intentFilters = new IntentFilter[]{};
         if (!nfcAdapter.isEnabled()) {
             Toast.makeText(this, "Please enable NFC in your device settings", Toast.LENGTH_SHORT).show();
