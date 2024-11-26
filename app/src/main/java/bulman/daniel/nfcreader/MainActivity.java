@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 NfcAdapter.ACTION_TECH_DISCOVERED.equals(action) ||
                 NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)) {
 
-            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG, Tag.class);
             byte[] data = null;
 
             // Check for NDEF format
@@ -83,12 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
             // Extract data from byte array
             if (data != null) {
-                try {
-                    String text = new String(data, "UTF-8");
-                    textView.setText("Data on card: " + text + "\n" + "ID: " + bytesToHexString(tag.getId()));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                String text = new String(data, StandardCharsets.UTF_8);
+                textView.setText("Data on card: " + text + "\n" + "ID: " + bytesToHexString(tag.getId()));
             }
             else{
                 textView.setText("Data on card: Unavailable\n" + "ID: " + bytesToHexString(tag.getId()));
@@ -191,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private String bytesToHexString(byte[] src) {
         StringBuilder stringBuilder = new StringBuilder(" 0x");
-        if (src == null || src.length <= 0) {
+        if (src == null || src.length == 0) {
             return null;
         }
         char[] buffer = new char[2];
